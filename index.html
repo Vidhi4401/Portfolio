@@ -82,7 +82,7 @@ section.sec{padding:60px 0 20px;scroll-margin-top:50px}
 .sh{opacity:0;transform:translateX(-36px);transition:opacity .7s,transform .8s cubic-bezier(.2,.8,.2,1)}.sh.in{opacity:1;transform:none}
 .sh::after{transform:scaleX(0);transform-origin:left;transition:transform 1.1s .25s cubic-bezier(.2,.8,.2,1)}.sh.in::after{transform:none}
 .hero{position:relative;isolation:isolate;min-height:calc(100vh - 78px);display:flex;flex-direction:column;justify-content:space-between;gap:18px;padding:10px 0 26px}
-.glow{position:absolute;inset:-40px -20px;z-index:-1;pointer-events:none;background:radial-gradient(420px circle at var(--mx,70%) var(--my,30%),color-mix(in srgb,var(--hl) 30%,transparent),transparent 70%)}
+.glow{display:none!important;position:absolute;inset:-40px -20px;z-index:-1;pointer-events:none;background:radial-gradient(420px circle at var(--mx,70%) var(--my,30%),color-mix(in srgb,var(--hl) 30%,transparent),transparent 70%)}
 .hrow{display:flex;justify-content:space-between;align-items:center}
 .hpill{display:flex;gap:8px;align-items:center;border:1px solid var(--line);background:var(--card);padding:7px 14px;border-radius:999px;font-size:13px}
 .hpill::before{content:"";width:8px;height:8px;border-radius:50%;background:#2fd36b;animation:pulse 1.8s infinite}
@@ -114,7 +114,7 @@ section.sec{padding:60px 0 20px;scroll-margin-top:50px}
 .hero{justify-content:center;gap:0}.hero .sc{position:absolute;left:0;bottom:24px}
 .bg{position:absolute;inset:0 -20px;overflow:hidden;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;animation:drift 10s ease-in-out infinite alternate}
-.o1{width:360px;height:360px;background:var(--hl);right:8%;top:8%}.o2{width:300px;height:300px;background:#38bdf8;right:26%;bottom:10%;animation-duration:13s;animation-delay:-4s;opacity:.38}.o3{width:240px;height:240px;background:#34d399;right:-2%;bottom:18%;animation-duration:16s;animation-delay:-8s;opacity:.32}
+.o1{width:360px;height:360px;background:var(--hl);right:8%;top:8%}.o2{width:300px;height:300px;background:var(--hl);right:26%;bottom:10%;animation-duration:13s;animation-delay:-4s;opacity:.38}.o3{width:240px;height:240px;background:var(--hl);right:-2%;bottom:18%;animation-duration:16s;animation-delay:-8s;opacity:.32}
 @keyframes drift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-70px,50px) scale(1.2)}}
 .rv2{opacity:0;transform:translateY(26px);transition:opacity .8s calc(var(--k)*.12s),transform .8s cubic-bezier(.2,.8,.2,1) calc(var(--k)*.12s)}.hero.in .rv2{opacity:1;transform:none}
 .h1n{font-size:clamp(46px,7.5vw,96px);font-weight:700;letter-spacing:-.05em;line-height:1;margin:14px 0 10px}.h1n span{color:var(--accent)}
@@ -225,6 +225,16 @@ main.wrap{padding-left:16px;padding-right:16px}.nav .wrap{padding:0 16px}
 .sec{padding:44px 0 6px}.t{padding:20px;border-radius:22px}.fp{padding:20px}
 .sh h2{font-size:34px}.rl{min-height:2.7em}.h1n{font-size:clamp(44px,14vw,64px)}
 .btn{padding:11px 20px}.ts .row{grid-template-columns:44px 1fr 66px}.cl h3{font-size:30px}}
+/* professional hero background: faint static grid only */
+.orb{display:none}
+.bg{-webkit-mask-image:none;mask-image:none}
+.bg::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;opacity:.55;-webkit-mask-image:radial-gradient(ellipse 70% 65% at 50% 45%,#000 20%,transparent 75%);mask-image:radial-gradient(ellipse 70% 65% at 50% 45%,#000 20%,transparent 75%)}
+.bg::after{display:none}
+/* profile intro */
+.about .abtag{display:inline-block;background:var(--ink);color:var(--bg);font:400 12px 'DM Mono',ui-monospace,monospace;letter-spacing:.04em;padding:7px 14px;border-radius:999px;margin-bottom:18px}
+.about .abh{font-size:clamp(24px,3vw,34px);line-height:1.15;letter-spacing:-.03em;margin:0 0 16px;font-weight:700}
+.about p{font-size:17px;line-height:1.65;color:var(--muted);letter-spacing:0;margin:0 0 14px}.about p+p{font-size:17px}
+.about p b{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body>
@@ -243,23 +253,101 @@ main.wrap{padding-left:16px;padding-right:16px}.nav .wrap{padding:0 16px}
   <span class="mono rv2" style="--k:0">Hello, I’m</span>
   <h1 class="h1n rv2" style="--k:1">Vidhi<span>.</span></h1>
   <p class="rl rv2" style="--k:2">I’m <b id="w"></b><span class="cur2"></span></p>
-  <p class="sb rv2" style="--k:3">I build full-stack apps and add AI to them, so everyday work becomes easier.</p>
+  <p class="sb rv2" style="--k:3">I build AI-powered applications with Python, FastAPI and LLMs.</p>
   <div class="btns rv2" style="--k:4"><a class="btn fill mag" href="#projects">See my work</a><a class="btn mag" href="#contact">Get in touch</a></div>
   
 </section>
 
-<section class="sec" id="profile"><div class="sh"><span class="mono">01</span><h2>Profile</h2></div><div class="grid">
-  <div class="t s8 about"><p>I’m Vidhi, an AI Engineer who builds apps that make everyday work easier.</p><p>I use Python and FastAPI to build full-stack apps and add AI to them. I use LLMs (AI chat models) to cut down manual work, and I build RAG apps, where an AI looks up a company’s own information before it answers. I like clean code, clear design, and learning something new on every project.</p></div>
-  <div class="t s4 dl"><h4>Quick facts</h4>
-    <div class="li"><div><small>Role</small><b>AI Engineer (Apprentice)</b></div></div>
-    <div class="li"><div><small>Focus</small><b>Python · FastAPI · LLMs · RAG</b></div></div>
-    <div class="li"><div><small>Education</small><b>B.Tech, Computer Engineering</b></div></div>
-    <div class="li"><div><small>Status</small><b>Open to opportunities</b></div></div></div>
-  <div class="t s4 what"><span class="n">01</span><h3>Full-stack apps</h3><p>From the backend to the screen, I build apps that people use every day.</p></div>
-  <div class="t s4 what"><span class="n">02</span><h3>LLM features</h3><p>I add AI chat models (LLMs) to apps so repetitive work takes less time.</p></div>
-  <div class="t s4 what"><span class="n">03</span><h3>RAG apps</h3><p>I build apps where an AI looks up a company’s own information before it answers.</p></div>
-  <div class="t"><h4>Find me online</h4><div class="btns" style="margin:8px 0 0"><a class="btn fill" data-l="resume" href="#">Download resume</a><a class="btn" data-l="linkedin" href="#">LinkedIn</a><a class="btn" data-l="github" href="#">GitHub</a></div></div>
-</div></section>
+
+<section class="sec" id="profile">
+  <div class="sh">
+    <span class="mono">01</span>
+    <h2>Profile</h2>
+  </div>
+
+  <div class="grid">
+    <div class="t s8 about">
+      <span class="abtag">Python · FastAPI · React · LLMs · RAG</span>
+
+      <h3 class="abh">Software engineer with a passion for AI.</h3>
+
+      <p>
+        I’m Vidhi, a software and AI engineer with a strong interest in
+        Python, backend development and <b>Generative AI</b>.
+        I enjoy building complete, end-to-end applications, from the
+        backend and database to the user interface and AI features,
+        using Python, FastAPI, React, LLMs and RAG.
+      </p>
+
+      <p>
+        I’m curious by nature and enjoy learning new technologies and
+        adapting to new tools. I focus on building clean, dependable
+        and user-friendly software, and I’m open to full-time roles
+        in software and AI engineering.
+      </p>
+    </div>
+
+    <div class="t s4 dl">
+      <h4>Quick facts</h4>
+
+      <div class="li">
+        <div>
+          <small>Current role</small>
+          <b>AI Engineer (Apprentice)</b>
+        </div>
+      </div>
+
+      <div class="li">
+        <div>
+          <small>Focus</small>
+          <b>Python · Backend · Generative AI</b>
+        </div>
+      </div>
+
+      <div class="li">
+        <div>
+          <small>Education</small>
+          <b>B.Tech, Computer Engineering (Completed)</b>
+        </div>
+      </div>
+
+      <div class="li">
+        <div>
+          <small>Status</small>
+          <b>Open to opportunities</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="t s4 what">
+      <span class="n">01</span>
+      <h3>Full-stack apps</h3>
+      <p>From APIs and databases to the user interface, I build complete, reliable applications.</p>
+    </div>
+
+    <div class="t s4 what">
+      <span class="n">02</span>
+      <h3>AI features</h3>
+      <p>I add LLM-powered features such as chat, search and automation to applications.</p>
+    </div>
+
+    <div class="t s4 what">
+      <span class="n">03</span>
+      <h3>RAG &amp; Gen AI</h3>
+      <p>I build retrieval-based apps where an AI answers from your own documents and data.</p>
+    </div>
+
+    <div class="t">
+      <h4>Find me online</h4>
+      <div class="btns" style="margin:8px 0 0">
+        <a class="btn fill" data-l="resume" href="#">Download resume</a>
+        <a class="btn" data-l="linkedin" href="#">LinkedIn</a>
+        <a class="btn" data-l="github" href="#">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section class="sec" id="projects"><div class="sh"><span class="mono">02</span><h2>Projects</h2></div><div class="grid">
   <div class="t fp">
@@ -346,11 +434,12 @@ main.wrap{padding-left:16px;padding-right:16px}.nav .wrap{padding:0 16px}
 
 <script>
 // ===== EDIT YOUR LINKS HERE =====
+// Replace the text between the quotes. Nothing else needs to change.
 const LINKS={
-  email:'your-email@example.com',
-  linkedin:'https://www.linkedin.com/in/your-name',
-  github:'https://github.com/Vidhi4401',
-  resume:'#'
+  email:'vidhi4104v@gmail.com',                 // your real email
+  linkedin:'https://www.linkedin.com/in/vidhi-panchal-2a331b256/', // your LinkedIn profile URL
+  github:'https://github.com/Vidhi4401',          // your GitHub profile URL
+  resume:'resume.pdf'                             // put resume.pdf in the same folder as index.html, or paste a Google Drive link
 };
 // ================================
 const $=id=>document.getElementById(id);
@@ -374,8 +463,8 @@ addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);add
 links.forEach(a=>a.addEventListener('click',()=>$('links').classList.remove('open')));
 $('burger').onclick=()=>{const o=$('links').classList.toggle('open');$('burger').textContent=o?'✕':'☰'};
 // clock, copy, theme
-const W=['an AI Engineer','a Python Developer','a Backend Developer','an LLM & RAG App Builder'];const w=$('w');let wi=0,wc=0,wd=false;
-(function ty(){const t=W[wi];w.textContent=t.slice(0,wc);let d=wd?35:75;if(!wd&&wc===t.length){wd=true;d=1500}else if(wd&&wc===0){wd=false;wi=(wi+1)%W.length;d=350}else wc+=wd?-1:1;setTimeout(ty,d)})();
+const W=['an AI Engineer'];const w=$('w');let wi=0,wc=0,wd=false;
+(function ty(){const t=W[wi];w.textContent=t.slice(0,wc);if(W.length===1&&wc===t.length)return;let d=wd?35:75;if(!wd&&wc===t.length){wd=true;d=1500}else if(wd&&wc===0){wd=false;wi=(wi+1)%W.length;d=350}else wc+=wd?-1:1;setTimeout(ty,d)})();
 const co=new IntersectionObserver(e=>e.forEach(x=>{const el=x.target,n=+el.dataset.n,s=el.dataset.s||'';clearInterval(el._t);if(!x.isIntersecting){el.textContent='0';return}let i=0;el._t=setInterval(()=>{i=Math.min(n,i+Math.ceil(n/30));el.textContent=i+s;if(i>=n)clearInterval(el._t)},40)}),{threshold:.6});
 document.querySelectorAll('[data-n]').forEach(el=>co.observe(el));
 const hero=$('home');
@@ -383,7 +472,7 @@ hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect(),x=e
 hero.addEventListener('pointerleave',()=>{hero.style.setProperty('--px',0);hero.style.setProperty('--py',0)});
 document.querySelectorAll('.mag').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.translate=`${(e.clientX-r.left-r.width/2)*.25}px ${(e.clientY-r.top-r.height/2)*.35}px`});b.addEventListener('pointerleave',()=>b.style.translate='')});
 // link wiring (uses LINKS at the top of this script)
-document.querySelectorAll('[data-l]').forEach(a=>{const k=a.dataset.l,u=k==='email'?'mailto:'+LINKS.email:LINKS[k];a.href=u;if(/^https?:/.test(u)){a.target='_blank';a.rel='noopener'}});
+document.querySelectorAll('[data-l]').forEach(a=>{const k=a.dataset.l,u=k==='email'?'mailto:'+LINKS.email:LINKS[k];a.href=u;if(/^https?:/.test(u)||k==='resume'){a.target='_blank';a.rel='noopener'}});
 document.querySelectorAll('[data-t="email"]').forEach(b=>b.textContent=LINKS.email);
 $('cf').addEventListener('submit',e=>{e.preventDefault();const n=$('fn').value,f=$('fe').value,m=$('fm').value;$('fnote').textContent='Opening your email app… If nothing opens, please email '+LINKS.email;location.href='mailto:'+LINKS.email+'?subject='+encodeURIComponent('Message from '+n)+'&body='+encodeURIComponent(m+'\n\n— '+n+' ('+f+')')});
 const root=document.documentElement;
