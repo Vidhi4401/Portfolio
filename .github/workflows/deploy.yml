@@ -18,7 +18,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+
+  # Job 1: Upload the website
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,6 +37,17 @@ jobs:
         with:
           path: .
 
+  # Job 2: Deploy after upload completes
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
